@@ -34,4 +34,13 @@ export default function renderHomeScreen() {
       alert("Failed to join game. Please try again.");
     }
   });
+
+  socket.on("gameWon", (data) => {
+    navigateTo("/finalResults", { 
+      winner: data.winner, 
+      winnerNickname: data.winnerNickname, 
+      players: data.players,
+      nickname: data.nickname 
+    });
+  });
 }

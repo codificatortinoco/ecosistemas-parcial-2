@@ -2,6 +2,7 @@ import renderHomeScreen from "./screens/homeScreen.js";
 import renderLobbyScreen from "./screens/lobbyScreen.js";
 import renderGameGround from "./screens/gameGround.js";
 import renderGameOverScreen from "./screens/gameOverScreen.js";
+import renderFinalResultsScreen from "./screens/finalResultsScreen.js";
 
 const socket = io("/", { path: "/real-time" });
 
@@ -29,6 +30,10 @@ function renderRoute(currentRoute) {
     case "/gameOver":
       clearScripts();
       renderGameOverScreen(currentRoute?.data);
+      break;
+    case "/finalResults":
+      clearScripts();
+      renderFinalResultsScreen(currentRoute?.data);
       break;
     default:
       const app = document.getElementById("app");

@@ -30,4 +30,13 @@ export default function renderLobbyScreen(data) {
   socket.on("startGame", (role) => {
     navigateTo("/game", { nickname: data.nickname, role });
   });
+
+  socket.on("gameWon", (data) => {
+    navigateTo("/finalResults", { 
+      winner: data.winner, 
+      winnerNickname: data.winnerNickname, 
+      players: data.players,
+      nickname: data.nickname 
+    });
+  });
 }

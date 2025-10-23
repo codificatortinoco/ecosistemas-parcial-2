@@ -108,6 +108,16 @@ const selectPolo = async (req, res) => {
     const winner = playersDb.checkForWinner();
     const updatedPlayers = playersDb.getAllPlayers();
     
+    if (winner) {
+      allPlayers.forEach((player) => {
+        emitToSpecificClient(player.id, "gameWon", {
+          winner: winner,
+          winnerNickname: winner.nickname,
+          players: updatedPlayers
+        });
+      });
+    }
+    
     emitEvent("scoreUpdate", { players: updatedPlayers, winner });
 
     res.status(200).json({ success: true });
@@ -128,6 +138,17 @@ const endRound = async (req, res) => {
     const updatedPlayers = playersDb.getAllPlayers();
     const winner = playersDb.checkForWinner();
     
+    if (winner) {
+      const allPlayers = playersDb.getAllPlayers();
+      allPlayers.forEach((player) => {
+        emitToSpecificClient(player.id, "gameWon", {
+          winner: winner,
+          winnerNickname: winner.nickname,
+          players: updatedPlayers
+        });
+      });
+    }
+    
     emitEvent("scoreUpdate", { players: updatedPlayers, winner });
 
     res.status(200).json({ success: true });
@@ -138,7 +159,7 @@ const endRound = async (req, res) => {
 
 const resetGame = async (req, res) => {
   try {
-    playersDb.resetScores();
+    playersDb.resetGame();
     const updatedPlayers = playersDb.getAllPlayers();
     
     emitEvent("gameReset", { players: updatedPlayers });

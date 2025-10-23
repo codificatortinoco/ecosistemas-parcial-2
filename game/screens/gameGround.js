@@ -72,4 +72,13 @@ export default function renderGameGround(data) {
   socket.on("notifyGameOver", (data) => {
     navigateTo("/gameOver", { message: data.message, nickname });
   });
+
+  socket.on("gameWon", (data) => {
+    navigateTo("/finalResults", { 
+      winner: data.winner, 
+      winnerNickname: data.winnerNickname, 
+      players: data.players,
+      nickname 
+    });
+  });
 }
