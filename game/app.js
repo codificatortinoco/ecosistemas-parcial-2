@@ -48,7 +48,7 @@ function navigateTo(path, data) {
 
 async function makeRequest(url, method, body) {
   try {
-    const BASE_URL = "http://localhost:5050";
+    const BASE_URL = window.location.origin;
     let response = await fetch(`${BASE_URL}${url}`, {
       method: method,
       headers: {
