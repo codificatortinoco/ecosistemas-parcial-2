@@ -31,19 +31,12 @@ export default function renderFinalResultsScreen(data) {
       </div>
       
       <div class="actions">
-        <button id="play-again-btn" class="btn btn-primary">Jugar de Nuevo</button>
         <button id="back-to-home-btn" class="btn btn-secondary">Volver al Inicio</button>
       </div>
     </div>
   `;
 
-  const playAgainBtn = document.getElementById("play-again-btn");
   const backToHomeBtn = document.getElementById("back-to-home-btn");
-
-  playAgainBtn.addEventListener("click", async () => {
-    await makeRequest("/api/game/reset", "POST");
-    navigateTo("/", {});
-  });
 
   backToHomeBtn.addEventListener("click", () => {
     navigateTo("/", {});
